@@ -56,7 +56,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-w-[600px] space-y-5">
+    <div className="min-w-[600px] space-y-8">
       <div className="flex flex-col items-start justify-start gap-2">
         <label htmlFor="text-to-read">Text to Read:</label>
         <textarea
@@ -84,8 +84,8 @@ const Home: React.FC = () => {
         </select>
       </div>
 
-      <div className="mb-4">
-        <label className="mr-2 font-medium">Adjust Speed:</label>
+      <div className="flex flex-col items-start justify-start gap-2">
+        <label className="font-medium">Adjust Speed:</label>
         <input
           type="range"
           min="0.5"
