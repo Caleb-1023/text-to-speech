@@ -3,9 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const Home: React.FC = () => {
-  const [text, setText] = useState("This is some sample text to be read.");
+  const [text, setText] = useState(
+    "Emmanuel Damilola Ajayi, born on the 25th of December (same day as our lord and saviour) is a very good developer. He is fascinated by game theory and is really interested in it, will he cooperate or defect?!"
+  );
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string>("");
+  const [rate, setRate] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const synthRef = useRef<SpeechSynthesisUtterance | null>(null);
 
@@ -25,6 +28,7 @@ const Home: React.FC = () => {
     const utterance = new SpeechSynthesisUtterance(text);
     const voice = voices.find((v) => v.name === selectedVoice);
     if (voice) utterance.voice = voice;
+    utterance.rate = rate;
 
     window.speechSynthesis.speak(utterance);
     synthRef.current = utterance;
@@ -78,6 +82,20 @@ const Home: React.FC = () => {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="mb-4">
+        <label className="mr-2 font-medium">Adjust Speed:</label>
+        <input
+          type="range"
+          min="0.5"
+          max="2"
+          step="0.1"
+          value={rate}
+          onChange={(e) => setRate(parseFloat(e.target.value))}
+          className="w-full"
+        />
+        <span className="ml-2">{rate.toFixed(1)}x</span>
       </div>
 
       <div className="flex items-center justify-center space-x-2">
